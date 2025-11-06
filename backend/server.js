@@ -32,12 +32,12 @@ async function startServer() {
         const passwords = await collection.find({}).toArray();
         res.json(passwords);
       } catch (err) {
-        console.error('Error in GET /passwords:', err);
+        console.error('Error in GET /:', err);
         res.status(500).json({ success: false, error: err.message });
       }
     });
 
-    app.post('/', async (req, res) => {
+    app.post('/passwords', async (req, res) => {
       try {
         const result = await collection.insertOne(req.body);
         res.json({ success: true, result });
@@ -47,7 +47,7 @@ async function startServer() {
       }
     });
 
-    app.delete('/', async (req, res) => {
+    app.delete('/passwords', async (req, res) => {
       try {
         const { _id } = req.body;
         const result = await collection.deleteOne({ _id: new ObjectId(_id) });
@@ -58,7 +58,7 @@ async function startServer() {
       }
     });
 
-    app.put('/', async (req, res) => {
+    app.put('/passwords', async (req, res) => {
       try {
         const { _id, site, username, password } = req.body;
         const result = await collection.updateOne(
