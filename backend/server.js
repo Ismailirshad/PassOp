@@ -8,7 +8,7 @@ const port = process.env.PORT;
 app.use(cors());
 app.use(express.json());
 
-const uri = 'mongodb://localhost:27017/';
+const uri = process.env.MONGO_URI;
 const dbName = 'passop';
 const collectionName = 'passwords';
 
