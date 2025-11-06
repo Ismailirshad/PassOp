@@ -5,6 +5,8 @@ const { MongoClient, ObjectId } = require('mongodb');
 
 const app = express();
 const port = process.env.PORT;
+app.set('json spaces', 2);
+
 app.use(cors());
 app.use(express.json());
 
@@ -25,7 +27,7 @@ async function startServer() {
 
     // Routes defined AFTER connection is successful
 
-    app.get('/passwords', async (req, res) => {
+    app.get('/', async (req, res) => {
       try {
         const passwords = await collection.find({}).toArray();
         res.json(passwords);
@@ -35,7 +37,7 @@ async function startServer() {
       }
     });
 
-    app.post('/passwords', async (req, res) => {
+    app.post('/', async (req, res) => {
       try {
         const result = await collection.insertOne(req.body);
         res.json({ success: true, result });
@@ -45,7 +47,7 @@ async function startServer() {
       }
     });
 
-    app.delete('/passwords', async (req, res) => {
+    app.delete('/', async (req, res) => {
       try {
         const { _id } = req.body;
         const result = await collection.deleteOne({ _id: new ObjectId(_id) });
@@ -56,7 +58,7 @@ async function startServer() {
       }
     });
 
-    app.put('/passwords', async (req, res) => {
+    app.put('/', async (req, res) => {
       try {
         const { _id, site, username, password } = req.body;
         const result = await collection.updateOne(
