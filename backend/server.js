@@ -1,12 +1,12 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
+import express from "express";
+import cors from "cors";
+import path from "path";
 dotenv.config();
-const express = require('express');
-const cors = require('cors');
 const { MongoClient, ObjectId } = require('mongodb');
 
 const app = express();
 const port = process.env.PORT;
-const path = require("path");
 app.set('json spaces', 2);
 
 app.use(cors());
