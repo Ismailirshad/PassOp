@@ -11,6 +11,7 @@ app.set('json spaces', 2);
 app.use(cors());
 app.use(express.json());
 
+app.use(express.static(path.join(__dirname, "../dist")));
 
 const uri = process.env.MONGO_URI;
 const dbName = 'passop';
@@ -75,7 +76,6 @@ async function startServer() {
     });
 
     
-    app.use(express.static(path.join(__dirname, "../dist")));
 
     app.get("*", (req, res) => {
       res.sendFile(path.join(__dirname, "../dist/index.html"));
