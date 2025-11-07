@@ -10,7 +10,7 @@ function Manager() {
     const [passwordArray, setPasswordArray] = useState([])
 
     const getPasswords = async () => {
-        let req = await fetch("http://localhost:5000/passwords");
+        let req = await fetch("https://your-render-app.onrender.com/passwords");
         let passwords = await req.json();
         console.log("fetched passowrds", passwords)
         if (passwords) {
@@ -38,7 +38,7 @@ function Manager() {
             try {
                 if (form._id) {
                     // Delete old password first
-                    await fetch("http://localhost:5000/passwords", {
+                    await fetch("https://your-render-app.onrender.com/passwords", {
                         method: "DELETE",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ _id: form._id }),
@@ -49,7 +49,7 @@ function Manager() {
                 const { _id, ...passwordData } = form;
 
                 // Save new password
-                const res = await fetch("http://localhost:5000/passwords", {
+                const res = await fetch("https://your-render-app.onrender.com/passwords", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(passwordData),
@@ -77,7 +77,7 @@ function Manager() {
         if (!window.confirm("Do you want to delete this password?")) return;
 
         try {
-            const res = await fetch("http://localhost:5000/passwords", {
+            const res = await fetch("https://your-render-app.onrender.com/passwords", {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ _id: id })

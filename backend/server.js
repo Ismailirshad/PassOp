@@ -5,10 +5,12 @@ const { MongoClient, ObjectId } = require('mongodb');
 
 const app = express();
 const port = process.env.PORT;
+const path = require("path");
 app.set('json spaces', 2);
 
 app.use(cors());
 app.use(express.json());
+
 
 const uri = process.env.MONGO_URI;
 const dbName = 'passop';
@@ -27,7 +29,7 @@ async function startServer() {
 
     // Routes defined AFTER connection is successful
 
-    app.get('/', async (req, res) => {
+    app.get('/passwords', async (req, res) => {
       try {
         const passwords = await collection.find({}).toArray();
         res.json(passwords);
@@ -70,6 +72,13 @@ async function startServer() {
         console.error('Error in PUT /passwords:', err);
         res.status(500).json({ success: false, error: err.message });
       }
+    });
+
+    
+    app.use(express.static(path.join(__dirname, "../dist")));
+
+    app.get("*", (req, res) => {
+      res.sendFile(path.join(__dirname, "../dist/index.html"));
     });
 
     app.listen(port, () => {
