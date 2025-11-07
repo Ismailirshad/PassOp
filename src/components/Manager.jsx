@@ -32,7 +32,6 @@ function Manager() {
         }
     }
 
-
     const savePassword = async () => {
         if (form.site.length > 3 && form.username.length > 3 && form.password.length > 3) {
             try {
@@ -44,8 +43,6 @@ function Manager() {
                         body: JSON.stringify({ _id: form._id }),
                     });
                 }
-
-                // Prepare data to save (remove id so Mongo creates new _id)
                 const { _id, ...passwordData } = form;
 
                 // Save new password

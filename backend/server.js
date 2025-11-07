@@ -17,7 +17,6 @@ app.set("json spaces", 2);
 
 app.use(cors());
 app.use(express.json());
-
 app.use(express.static(path.join(__dirname, "dist")));
 
 const uri = process.env.MONGO_URI;
@@ -83,7 +82,6 @@ async function startServer() {
    app.get("(.*)", (req, res) => {
   res.sendFile(path.join(__dirname, "dist/index.html"));
 });
-
 
     app.listen(port, () => {
       console.log(` Server is running on port ${port}`);

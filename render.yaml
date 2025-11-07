@@ -1,6 +1,6 @@
-services:
-  - type: web
-    name: PassOp
-    rootDir: .
-    buildCommand: npm install && npm run build
-    startCommand: npm start
+# services:
+#   - type: web
+#     name: PassOp
+#     rootDir: .
+#     buildCommand: npm install && npm run build
+#     startCommand: npm start
